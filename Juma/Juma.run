@@ -1,0 +1,3 @@
+#!/bin/bash
+#Juma test version
+java -Djava.library.path=./libs/lwjgl-2.8.5/native/linux/ -jar "./dist/Juma.jar"
