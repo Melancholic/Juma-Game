@@ -23,12 +23,14 @@ class Shoot {
         }else{
              try {
             Ball.color=(BALLS) next.clone();
+            next=new BALLS();
              } catch (CloneNotSupportedException e) {
                     System.out.println("err::Shoot::CreateBall()");
              }
         }
         Ball.TexColor=null;
-        Ball.TexColor=Graphics.TexBlue;
+        Ball.TexColor=Graphics.getTexColor(Ball.color);
+        System.out.println(Ball.color.toString());
     }
     
     static BALLS getNext(){

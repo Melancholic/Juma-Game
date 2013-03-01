@@ -31,7 +31,35 @@ class Graphics implements Cloneable{
     static final Texture TexGreen = loadTexture("green");
     static final Texture TexYellow = loadTexture("yellow");
     static final Texture TexBrown = loadTexture("brown");
-    static final Texture Texblack = loadTexture("black");
+    static final Texture TexBlack = loadTexture("black");
+   
+    static Texture getTexColor(BALLS ball){
+        Texture tmpTex;
+        switch(ball.toString()){
+            case "red": 
+                tmpTex= TexRed;
+                break; 
+            case "blue": 
+                tmpTex= TexBlue;
+                break;     
+            case "green": 
+                tmpTex= TexGreen;
+                break;
+            case "yellow": 
+                tmpTex= TexYellow;
+                break;
+            case "brown": 
+                tmpTex= TexBrown;
+                break;
+            case "black": 
+                tmpTex= TexBlack;
+                break;
+            default: 
+                throw new IllegalArgumentException("Invalid value of color" );
+        }
+        return tmpTex;
+    }
+    
     static Texture loadTexture(String key){
             try {
                 return TextureLoader.getTexture("PNG",new FileInputStream(new File("res/"+key+".png")));
