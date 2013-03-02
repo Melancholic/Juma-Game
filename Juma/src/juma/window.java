@@ -56,7 +56,7 @@ public class window {
             System.exit(0);
         }
         Baground= Graphics.loadTexture("baground2");
-
+        Player.init();
         Shoot.CreateBall(0, 0);
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
@@ -133,14 +133,10 @@ GL11.glEnd();
       static void printPlayer(){
          float Trot;
         Trot = 90-(float)(Math.atan2(Mouse.getY()-Player.Y,Mouse.getX()-Player.X))*180/(float)Math.PI;
-        // Trot=0;
            System.out.println(Trot);
-        Player.TexPlayer.bind();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glColor4ub((byte) 255, (byte) 255, (byte)255, (byte)255); 
-             // GL11.glLoadIdentity(); 
-
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
   GL11.glLoadIdentity();
   GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -148,8 +144,12 @@ GL11.glEnd();
   GL11.glPushMatrix();
   GL11.glTranslatef(Player.X, Player.Y, 0);
   GL11.glRotatef(Trot, 0, 0, 1);
-
-        Player.TexPlayer.bind();
+  double Dist=GetDistToPoint(Shoot.Ball.X,Shoot.Ball.Y,Player.X,Player.Y);
+        if(Shoot.ballToStartPos()){
+            Player.TexPlayer[0].bind();
+        } else if(Dist<70){
+            Player.TexPlayer[1].bind();
+        } else  Player.TexPlayer[2].bind();
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glColor4f(1.0f,1.0f,1.0f,0.0f);        
         GL11.glTexCoord2f(0,0);
@@ -165,5 +165,8 @@ GL11.glEnd();
         
 GL11.glPopMatrix();
     }
+      static double GetDistToPoint(double X1, double Y1, double X2, double Y2){
+          return Math.sqrt(Math.pow(X1-X2, 2)+(Math.pow(Y1-Y2, 2)));
+      }
 }
 
