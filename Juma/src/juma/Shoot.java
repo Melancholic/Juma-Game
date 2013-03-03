@@ -10,8 +10,8 @@ package juma;
  */
 
 class Shoot {
-    static final int Y=window.Height/2;
-    static final int X=window.Width/2;
+    static final int X=Level.getPlayerX();
+    static final int Y=Level.getPlayerY();
     static userBall Ball = new userBall(X,Y);
     static private BALLS next;
    
@@ -37,8 +37,8 @@ class Shoot {
         return next;
     }
     static void make(int mouseX, int mouseY){
-        double vX=(mouseX-X)/Math.sqrt((double)(Math.pow(mouseX-X, 2)+(Math.pow(mouseY-Y, 2))));
-        double vY=(Y-mouseY)/Math.sqrt((double)(Math.pow(mouseX-X, 2)+(Math.pow(mouseY-Y, 2))));
+        double vX=(mouseX-X)/Math.sqrt((double)(Math.pow(mouseX-X, 2)+(Math.pow(mouseY-Y, 2))))*(window.Height+window.Width)*0.005;
+        double vY=(Y-mouseY)/Math.sqrt((double)(Math.pow(mouseX-X, 2)+(Math.pow(mouseY-Y, 2))))*(window.Height+window.Width)*0.005;
         Ball.setSpeeds(vX, vY);
     }
 

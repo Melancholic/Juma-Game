@@ -65,3 +65,14 @@ class streamsShootRunNext implements Runnable{
         }
     }
  
+class streamsUpdateFPS implements Runnable{
+        Thread tmp;
+        streamsUpdateFPS(){
+            tmp=new Thread(this,"UpdateFPS");
+            tmp.start();
+        }
+        @Override
+        public void run(){
+             window.updateFPS();
+        }        
+}

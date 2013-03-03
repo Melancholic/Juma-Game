@@ -40,6 +40,7 @@ class BALLS implements Cloneable{
 class ball implements Cloneable{
     protected double X;
     protected double Y;
+    protected final double Size=((window.Height+window.Width)*0.01);
     BALLS color;
     Texture TexColor;
     static final int BallsNums=6;
