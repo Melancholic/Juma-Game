@@ -30,7 +30,7 @@ class Shoot {
         }
         Ball.TexColor=null;
         Ball.TexColor=Graphics.getTexColor(Ball.color);
-        System.out.println(Ball.color.toString()+"->"+next);
+        
     }
     
     static BALLS getNext(){

@@ -4,7 +4,7 @@
  */
 package juma;
 
-import java.util.logging.Level;
+
 import java.util.logging.Logger;
 
 /**
@@ -74,5 +74,19 @@ class streamsUpdateFPS implements Runnable{
         @Override
         public void run(){
              window.updateFPS();
-        }        
+        }
 }
+class streamsIsLvlUp implements Runnable{
+        Thread tmp;
+        streamsIsLvlUp(){
+            tmp=new Thread(this,"UpdateFPS");
+            tmp.start();
+        }
+        @Override
+        public void run(){
+             if (Player.getScore()>=Level.MaxScore){
+                 Player.levelUp();
+             }
+        }
+}
+ 

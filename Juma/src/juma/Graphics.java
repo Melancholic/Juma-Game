@@ -64,10 +64,10 @@ class Graphics implements Cloneable{
             try {
                 return TextureLoader.getTexture("PNG",new FileInputStream(new File("res/"+key+".png")));
             } catch (FileNotFoundException e) {
-                System.out.print("err1");
+                System.out.print("Err in Texture::loadtexture::FileNotFoud");
                 e.printStackTrace();
         } catch (IOException e) {
-            System.out.print("err1");
+            System.out.print("Err in Texture::loadtexture::IOException");
             e.printStackTrace();
         }
         return null;
