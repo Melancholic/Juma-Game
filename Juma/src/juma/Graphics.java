@@ -33,9 +33,9 @@ class Graphics implements Cloneable{
     static final Texture TexBrown = loadTexture("brown");
     static final Texture TexBlack = loadTexture("black");
    
-    static Texture getTexColor(BALLS ball){
+    static Texture getTexColor(String color){
         Texture tmpTex;
-        switch(ball.toString()){
+        switch(color){
             case "red": 
                 tmpTex= TexRed;
                 break; 

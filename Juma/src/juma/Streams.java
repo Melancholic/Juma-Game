@@ -28,7 +28,7 @@ class Streams {
 class streamsKeyIsBind implements Runnable{
         Thread tmp;
         streamsKeyIsBind(){
-            tmp=new Thread(this);
+            tmp=new Thread(this,"streamsKeyIsBind");
             tmp.start();
         }
         @Override
@@ -40,7 +40,7 @@ class streamsKeyIsBind implements Runnable{
 class streamsShootBallRun implements Runnable{
         Thread tmp;
         streamsShootBallRun(){
-            tmp=new Thread(this);
+            tmp=new Thread(this,"streamsShootBallRun");
             tmp.start();
         }
         @Override
@@ -52,7 +52,7 @@ class streamsShootBallRun implements Runnable{
 class streamsShootRunNext implements Runnable{
         Thread tmp;
         streamsShootRunNext(){
-            tmp=new Thread(this,"run");
+            tmp=new Thread(this,"streamsShootRunNext");
             tmp.start();
         }
         @Override
@@ -79,7 +79,7 @@ class streamsUpdateFPS implements Runnable{
 class streamsIsLvlUp implements Runnable{
         Thread tmp;
         streamsIsLvlUp(){
-            tmp=new Thread(this,"UpdateFPS");
+            tmp=new Thread(this,"Streams Is Lvl up");
             tmp.start();
         }
         @Override
@@ -87,6 +87,30 @@ class streamsIsLvlUp implements Runnable{
              if (Player.getScore()>=Level.MaxScore){
                  Player.levelUp();
              }
+        }
+}
+
+class streamsSnakeRun implements Runnable{
+        Thread tmp;
+        streamsSnakeRun(){
+            tmp=new Thread(this,"SnakeRun");
+            tmp.start();
+        }
+        @Override
+        public void run(){
+            Snake.run();
+        }
+}
+
+class streamsSnakeIsAdd implements Runnable{
+        Thread tmp;
+        streamsSnakeIsAdd(){
+            tmp=new Thread(this,"SnakeRun");
+            tmp.start();
+        }
+        @Override
+        public void run(){
+            Snake.IsAdd();
         }
 }
  

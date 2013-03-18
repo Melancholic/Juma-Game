@@ -18,14 +18,21 @@ public class Level {
     static private int lvl;
     static private double StartX;
     static private double StartY;
-    static ArrayList<point> LevelsPoints=new ArrayList<>();
+    static private double StopX;
+    static private double StopY;
+    static ArrayList<point> LevelsPoints;
     static long MaxScore=500;
-    static void init(int Level){
+    
+    static void init(int Level){  
+        LevelsPoints=new ArrayList<>();
         PlayerX=window.Width/2;
         PlayerY=window.Height/2;
-        StartX=50;
-        StartY=50;
+        StartX=window.Width/20;
+        StartY=window.Height/15;
+        StopX=window.Width*0.95;
+        StopY=window.Height*0.95;
         lvl=Level;
+        loadBin2List((int)(Level % 9)); 
         MaxScore=lvl*MaxScore;
         Snake.init();
        
@@ -36,17 +43,29 @@ public class Level {
     static int getPlayerY(){
         return PlayerY;
     }
-        static double getStartX(){
+    static double getStartX(){
         return StartX;
     }
     static double getStartY(){
         return StartY;
     }
+    static double getStopX(){
+        return StopX;
+    }
+    static double getStopY(){
+        return StopY;
+    }
     static int lvl(){
         return lvl;
     }
     static void loadBin2List(long LvlValue){
+        try{
+            DataInputStream file = new DataInputStream(new FileInputStream("./data/levels/"+Long.toString(LvlValue)+".dat"));
+        } catch (IOException ex) {
+                    Createlevel.CreateDefault((int)LvlValue);
+        }
          try {
+             
             DataInputStream file = new DataInputStream(new FileInputStream("./data/levels/"+Long.toString(LvlValue)+".dat"));
             double tmpX,tmpY;
             while(true){
@@ -54,13 +73,14 @@ public class Level {
                 tmpX=file.readDouble();
                 tmpY=file.readDouble();
                 LevelsPoints.add(new point(tmpX,tmpY));
-                }catch(NullPointerException e){
+                }catch(IOException e){
                     break;
                 }
             }
-                file.close();
+            file.close();
             } catch (IOException ex) {
             System.err.println("Err in level::loadBin2List::IOException");
+            ex.printStackTrace();
             }
     }
 

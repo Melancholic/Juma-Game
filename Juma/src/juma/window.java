@@ -6,6 +6,8 @@ package juma;
  */
 
 import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display; 
@@ -18,33 +20,13 @@ import org.newdawn.slick.opengl.Texture;
  * @email grizzly-terror@yandex.ru
  */
 public class window {
-     static  final int Height=780;
+    static  final int Height=780;
     static final int Width=1024;
     private static long FPS;
     private static long lastFPS;
-     Texture Baground;
+    Texture Baground;
     static boolean incorredValsDisplay(int width, int height){
         return (height>Height || height<0) ||(width>Width || width<0);
-    }
-    
-       static void printBallObj(ball Ball){
-           if(Ball.TexColor!=null){
-            Ball.TexColor.bind();}
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4ub((byte) 255, (byte) 255, (byte)255, (byte)255); 
-        GL11.glBegin(GL11.GL_QUADS);
-        GL11.glColor4f(1.0f,1.0f,1.0f,0.0f); 
-        GL11.glTexCoord2f(0,0);
-        GL11.glVertex2i((int)(Ball.getX()-Ball.Size),(int)(Ball.getY()-Ball.Size));
-        GL11.glTexCoord2f(1,0);
-        GL11.glVertex2i((int)(Ball.getX()-Ball.Size),(int)(Ball.getY()+Ball.Size));
-        GL11.glTexCoord2f(1,1);
-        GL11.glVertex2i((int)(Ball.getX()+Ball.Size),(int)(Ball.getY()+Ball.Size));
-        GL11.glTexCoord2f(0,1);
-        GL11.glVertex2i((int)(Ball.getX()+Ball.Size),(int)(Ball.getY()-Ball.Size));
-        GL11.glEnd();
-        GL11.glDisable(GL11.GL_BLEND);
     }
     
     public void start(){
@@ -59,8 +41,8 @@ public class window {
             System.exit(0);
         }
         Baground= Graphics.loadTexture("baground2");
-         Player.init();
-         //Snake.init();
+        //Createlevel.CreateDefaultAll();
+        Player.init();
         Shoot.CreateBall(0, 0);
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
@@ -76,14 +58,8 @@ public class window {
         lastFPS = getTime();
         //example
         //System.err.println(window.GetDistToPoint(1000, 50, 999, 50));
-     /*   Createlevel.SaveToFile(1, new point(Level.getStartX(),Level.getStartY()), 
-                new point(window.Width-window.Width*0.05, window.Height*0.05),
-                new point(window.Width-window.Width*0.05,window.Height*0.2),
-                new point(window.Width*0.2 , window.Height*0.2),
-                new point(window.Width*0.2,window.Height-window.Height*0.20),
-                new point(window.Width*0.95,window.Height*0.8),
-                new point(window.Width*0.95,window.Height*0.95));*/
-        Level.loadBin2List(1);   
+     /*   */
+        
         /*
         for(int i=0;i<Level.LevelsPoints.size();++i){
             System.out.println( Level.LevelsPoints.get(i) );
@@ -100,8 +76,9 @@ public class window {
             new streamsKeyIsBind();
             new streamsShootBallRun();
             new streamsShootRunNext();
-            printBallObj(Shoot.Ball);
-            Snake.run();
+            new streamsSnakeRun();
+            new streamsSnakeIsAdd();
+            printBallObj(Shoot.Ball);        
             Snake.print();
             Display.update();
             Display.sync(60);
@@ -150,6 +127,9 @@ public class window {
           GL11.glPushMatrix();
           GL11.glTranslatef(Player.getX(), Player.getY(), 0);
           GL11.glRotatef(Trot, 0, 0, 1);
+          if(Shoot.Ball==null){
+              new streamsShootRunNext();
+            }
           double Dist=GetDistToPoint(Shoot.Ball.X,Shoot.Ball.Y,Player.getX(),Player.getY());
           if(Shoot.ballToStartPos()){
               Player.TexPlayer[0].bind();
@@ -170,9 +150,28 @@ public class window {
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
     }
+    static void printBallObj(ball Ball){
+           if(Ball.color.TexColor!=null){
+            Ball.color.TexColor.bind();}
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glColor4ub((byte) 255, (byte) 255, (byte)255, (byte)255); 
+        GL11.glBegin(GL11.GL_QUADS);
+        GL11.glColor4f(1.0f,1.0f,1.0f,0.0f); 
+        GL11.glTexCoord2f(0,0);
+        GL11.glVertex2i((int)(Ball.getX()-Ball.Size),(int)(Ball.getY()-Ball.Size));
+        GL11.glTexCoord2f(1,0);
+        GL11.glVertex2i((int)(Ball.getX()-Ball.Size),(int)(Ball.getY()+Ball.Size));
+        GL11.glTexCoord2f(1,1);
+        GL11.glVertex2i((int)(Ball.getX()+Ball.Size),(int)(Ball.getY()+Ball.Size));
+        GL11.glTexCoord2f(0,1);
+        GL11.glVertex2i((int)(Ball.getX()+Ball.Size),(int)(Ball.getY()-Ball.Size));
+        GL11.glEnd();
+        GL11.glDisable(GL11.GL_BLEND);
+    }
       
       static void setDispTitle(){
-            Display.setTitle("Juma ver 0.2a | FPS: " + FPS+" Height: "+window.Height+" Width: "+window.Width);
+            Display.setTitle("Juma ver 0.3a | FPS: " + FPS+" Height: "+window.Height+" Width: "+window.Width);
       }
       
       static double GetDistToPoint(double X1, double Y1, double X2, double Y2){

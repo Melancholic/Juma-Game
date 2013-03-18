@@ -28,8 +28,8 @@ class Shoot {
                     System.out.println("err::Shoot::CreateBall()");
              }
         }
-        Ball.TexColor=null;
-        Ball.TexColor=Graphics.getTexColor(Ball.color);
+       // Ball.TexColor=null;
+      //  Ball.TexColor=Graphics.getTexColor(Ball.color);
         
     }
     
@@ -37,13 +37,15 @@ class Shoot {
         return next;
     }
     static void make(int mouseX, int mouseY){
-        double vX=(mouseX-X)/Math.sqrt((double)(Math.pow(mouseX-X, 2)+(Math.pow(mouseY-Y, 2))))*(window.Height+window.Width)*0.005;
-        double vY=(Y-mouseY)/Math.sqrt((double)(Math.pow(mouseX-X, 2)+(Math.pow(mouseY-Y, 2))))*(window.Height+window.Width)*0.005;
+        double vX=(mouseX-X)/Math.sqrt((double)(Math.pow(mouseX-X, 2)+
+                (Math.pow(mouseY-Y, 2))))*(window.Height+window.Width)*0.005;
+        double vY=(Y-mouseY)/Math.sqrt((double)(Math.pow(mouseX-X, 2)+
+                (Math.pow(mouseY-Y, 2))))*(window.Height+window.Width)*0.005;
         Ball.setSpeeds(vX, vY);
     }
 
     static void runNext() throws CloneNotSupportedException{
-        if(window.incorredValsDisplay((int)Ball.getX(), (int)Ball.getY())){
+        if(Shoot.Ball==null || window.incorredValsDisplay((int)Ball.getX(), (int)Ball.getY())){
             CreateBall(X,Y);
         }
     }
