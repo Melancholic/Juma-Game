@@ -2,12 +2,14 @@ juma.streamsIsLvlUp
 juma.streamsPrintBallObj
 juma.Streams
 juma.streamsSnakeRun
+juma.streamsSnakeIsAdd$streamsSnakeIsRem
 juma.streamsSnakePrint
-juma.streamsKeyIsBind
 juma.streamsSnakeProcess$streamsSnakePrint
+juma.streamsKeyIsBind
+juma.streamsSnakeIsRem
 juma.streamsUpdateFPS
-juma.streamsSnakeIsAdd
 juma.streamsSnakeProcess
+juma.streamsSnakeIsAdd
 juma.streamsUpdateFPS$streamsSnakeProcess
 juma.streamsShootRunNext
 juma.streamsShootBallRun

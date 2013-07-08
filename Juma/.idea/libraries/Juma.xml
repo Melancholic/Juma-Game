@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Juma">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/Juma.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
